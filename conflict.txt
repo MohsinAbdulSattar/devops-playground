@@ -1,1 +1,1 @@
-This is from the conflict branch
+this is different content from conflict-branch .
