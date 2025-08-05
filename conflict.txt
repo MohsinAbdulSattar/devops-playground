@@ -1,1 +1,1 @@
-This is from the conflict branch
+this is the original content form master.
