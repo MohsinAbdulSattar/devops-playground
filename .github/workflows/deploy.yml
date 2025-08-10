@@ -1,4 +1,4 @@
-name: Run Python Script (CI/CD)
+name: Run Python Script and Save Output
 
 on:
   push:
@@ -17,5 +17,13 @@ jobs:
         with:
           python-version: '3.x'
 
-      - name: Run Python script
-        run: python main.py
+      - name: Run Python script and save output
+        run: |
+          python main.py > output.txt
+          echo "Script ran successfully and saved output to output.txt"
+
+      - name: Upload output.txt as artifact
+        uses: actions/upload-artifact@v3
+        with:
+          name: python-script-output
+          path: output.txt
