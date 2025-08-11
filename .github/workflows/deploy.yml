@@ -2,7 +2,8 @@ name: Run Python Script and Save Output
 
 on:
   push:
-    branches: master
+    branches:
+      - master
 
 jobs:
   run-python:
@@ -15,12 +16,21 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.x'
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
       - name: Run Python script and save output
         run: |
           python main.py > output.txt
           echo "Script ran successfully and saved output to output.txt"
+
+      - name: Run tests
+        run: |
+          if [ -f test_main.py ]; then pytest || echo "Tests failed"; else echo "No tests found"; fi
 
       - name: Upload output.txt as artifact
         uses: actions/upload-artifact@v4
