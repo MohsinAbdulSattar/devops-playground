@@ -24,4 +24,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: html-output
-          path: output.htm
+          path: output.html
